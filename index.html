@@ -6,46 +6,65 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            height: 100vh; /* Full viewport height */
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Centering flashcard vertically */
+            padding: 20px;
             background-color: #f0f0f0;
         }
         #flashcard {
             width: 60%;
             max-width: 800px;
+            height: 300px; /* Fixed height for the flashcard */
             border: 2px solid #000;
             padding: 40px;
+            margin: 20px auto;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         #amendment, #summary {
             font-size: 28px;
             font-weight: bold;
+            text-align: left;
         }
         #summary {
             display: none;
             font-weight: normal;
+        }
+        .button-container {
+            text-align: center;
             margin-top: 20px;
         }
         .button {
+            width: 200px; /* Fixed width for each button */
+            height: 50px; /* Fixed height for each button */
             margin: 10px;
-            padding: 15px 30px;
+            padding: 10px 20px;
             font-size: 20px;
             cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+            box-sizing: border-box;
         }
-        .button-container {
-            /* Add any additional styles if needed, e.g., margin-top for spacing */
-            margin-top: 20px;
+        @media (max-width: 768px) {
+            #flashcard {
+                width: 90%;
+                height: auto; /* Flexible height on smaller screens */
+                padding: 20px;
+            }
+            #amendment, #summary {
+                font-size: 24px;
+            }
+            .button {
+                padding: 10px 20px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
-
-</body>
-</html>
 
 <div id="flashcard">
     <p id="amendment"></p>
@@ -59,7 +78,7 @@
 </div>
 
 <script>
-      var amendments = [
+    var amendments = [
     ["First Amendment", "Guarantees freedoms concerning religion, expression, assembly, and the right to petition."],
     ["Second Amendment", "Guarantees the right to bear arms."],
     ["Third Amendment", "Prohibits the quartering of soldiers in private homes without the owner's consent during peacetime."],
@@ -97,7 +116,7 @@
             document.getElementById("summary").style.display = "block";
             document.getElementById("next").textContent = "Next Amendment";
         } else {
-            if (current < 0) current = amendments.length - 1; // Wrap around to last amendment if current is less than 0
+            if (current < 0) current = amendments.length - 1;
             document.getElementById("amendment").textContent = amendments[current][0];
             document.getElementById("summary").textContent = amendments[current][1];
             document.getElementById("summary").style.display = "none";
@@ -128,7 +147,6 @@
 
     document.getElementById("startOver").onclick = startOver;
 
-    // Initialize the first flashcard
     startOver();
 </script>
 
